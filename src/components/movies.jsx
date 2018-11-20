@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import Like from "./commons/like";
 
 class Movies extends Component {
   state = {
@@ -12,10 +13,13 @@ class Movies extends Component {
     });
   };
 
-  toggleClass = e => {
-    e.preventDefault();
-    var element = document.getElementById("myDIV");
-    element.classList.toggle("fa fa-heart");
+  handleLike = movie => {
+    //get all the movies from state
+    const movies = [...this.state.movies];
+    //get index of the movie to toggle 'like' property
+    const index = movies.indexOf(movie);
+    movies[index].like = !movies[index].like;
+    this.setState({ movie });
   };
 
   render() {
@@ -47,10 +51,9 @@ class Movies extends Component {
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <span
-                    id="myDIV"
-                    className="fa fa-heart-o"
-                    onClick={this.toggleClass}
+                  <Like
+                    liked={movie.like}
+                    onClick={() => this.handleLike(movie)}
                   />
                 </td>
                 <td>
