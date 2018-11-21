@@ -4,7 +4,7 @@ import _ from "lodash";
 class Pagination extends Component {
   state = {};
   render() {
-    const { totalMovies, listSize, onPageChange } = this.props;
+    const { totalMovies, listSize, currentPage, onPageChange } = this.props;
 
     let pagesCount = Math.ceil(totalMovies / listSize);
     //if only one page then no pagination links
@@ -16,7 +16,12 @@ class Pagination extends Component {
         <ul className="pagination">
           {pages.map(page => {
             return (
-              <li key={page} className="page-item">
+              <li
+                key={page}
+                className={
+                  page === currentPage ? "page-item active" : "page-item"
+                }
+              >
                 <a className="page-link" onClick={() => onPageChange(page)}>
                   {page}
                 </a>
