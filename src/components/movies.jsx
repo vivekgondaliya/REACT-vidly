@@ -5,7 +5,8 @@ import Pagination from "./commons/pagination";
 
 class Movies extends Component {
   state = {
-    movies: getMovies()
+    movies: getMovies(),
+    listSize: 4
   };
 
   handleDelete = movie => {
@@ -23,6 +24,8 @@ class Movies extends Component {
     this.setState({ movie });
   };
 
+  handlePageChange = () => {};
+
   render() {
     const movies = this.state.movies || {};
     const { length: movieCount } = this.state.movies;
@@ -38,7 +41,11 @@ class Movies extends Component {
           onDelete={this.handleDelete}
           onLike={this.handleLike}
         />
-        <Pagination />
+        <Pagination
+          totalMovies={movieCount}
+          listViewSize={this.state.listSize}
+          onPageChange={this.handlePageChange}
+        />
       </div>
     );
   }
