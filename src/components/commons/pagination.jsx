@@ -1,26 +1,28 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 class Pagination extends Component {
   state = {};
   render() {
+    const { totalMovies, listSize, onPageChange } = this.props;
+
+    let pagesCount = Math.ceil(totalMovies / listSize);
+    //if only one page then no pagination links
+    if (pagesCount === 1) return null;
+    const pages = _.range(1, pagesCount + 1);
+
     return (
-      <nav aria-label="Page navigation example">
+      <nav aria-label="navigation">
         <ul className="pagination">
-          <li className="page-item">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
+          {pages.map(page => {
+            return (
+              <li key={page} className="page-item">
+                <a className="page-link" onClick={() => onPageChange(page)}>
+                  {page}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     );

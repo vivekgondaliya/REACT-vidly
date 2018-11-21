@@ -24,7 +24,9 @@ class Movies extends Component {
     this.setState({ movie });
   };
 
-  handlePageChange = () => {};
+  handlePageChange = page => {
+    console.log("Page Change Clicked...", page);
+  };
 
   render() {
     const movies = this.state.movies || {};
@@ -43,7 +45,7 @@ class Movies extends Component {
         />
         <Pagination
           totalMovies={movieCount}
-          listViewSize={this.state.listSize}
+          listSize={this.state.listSize}
           onPageChange={this.handlePageChange}
         />
       </div>
