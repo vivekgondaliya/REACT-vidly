@@ -16,7 +16,8 @@ class Movies extends Component {
 
   //back-end services are feteched here to avoid state prop being undefined on initial render
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = movie => {
@@ -39,7 +40,7 @@ class Movies extends Component {
   };
 
   handleGenreSelect = genre => {
-    this.setState({ selectedGenre: genre });
+    this.setState({ selectedGenre: genre, currentPage: 1 });
 
     // const tempMovies = [...this.state.movies];
     // this.setState({
@@ -61,9 +62,10 @@ class Movies extends Component {
     if (movieCount === 0) return <p>There are no movies in the database</p>;
 
     //filter before paginate
-    const filteredMovies = selectedGenre
-      ? allMovies.filter(item => item.genre._id === selectedGenre._id)
-      : allMovies;
+    const filteredMovies =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter(item => item.genre._id === selectedGenre._id)
+        : allMovies;
 
     //paginate util
     const movies = paginate(filteredMovies, currentPage, listSize);
