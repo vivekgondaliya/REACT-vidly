@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Like from "./commons/like";
+import TableHeader from "./commons/tableHeader";
 
 class MovieTable extends Component {
   //moved this logic out of Movies component,
@@ -7,29 +8,24 @@ class MovieTable extends Component {
   //we just return the sortColumn object and
   //the other component(i.e. Movie) will re-render accordingly
   //MOVED to tableHeader.jsx
-
+  columns = [
+    { path: "title", label: "Title" },
+    { path: "genre.name", label: "Genre" },
+    { path: "numberInStocks", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rate" },
+    { key: "like" },
+    { key: "delete" }
+  ];
   render() {
-    const { movies, onLike, onDelete } = this.props;
+    const { movies, onLike, onDelete, onSort, sortColumn } = this.props;
+
     return (
       <table className="table">
-        <thead>
-          <tr>
-            <th onClick={() => this.raiseSort("title")} scope="col">
-              Title
-            </th>
-            <th onClick={() => this.raiseSort("genre.name")} scope="col">
-              Genre
-            </th>
-            <th onClick={() => this.raiseSort("numberInStock")} scope="col">
-              Stock
-            </th>
-            <th onClick={() => this.raiseSort("dailyRentalRate")} scope="col">
-              Rate
-            </th>
-            <th scope="col" />
-            <th scope="col" />
-          </tr>
-        </thead>
+        <TableHeader
+          columns={this.columns}
+          sortColumn={sortColumn}
+          onSort={onSort}
+        />
         <tbody>
           {movies.map(movie => (
             <tr key={movie._id}>
