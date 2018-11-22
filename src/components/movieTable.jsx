@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Like from "./commons/like";
 import TableHeader from "./commons/tableHeader";
 import TableBody from "./commons/tableBody";
 
@@ -13,8 +14,23 @@ class MovieTable extends Component {
     { path: "genre.name", label: "Genre" },
     { path: "numberInStocks", label: "Stock" },
     { path: "dailyRentalRate", label: "Rate" },
-    { key: "like" },
-    { key: "delete" }
+    {
+      key: "like",
+      content: movie => (
+        <Like liked={movie.like} onClick={() => this.props.onLike(movie)} />
+      )
+    },
+    {
+      key: "delete",
+      content: movie => (
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => this.props.onDelete(movie)}
+        >
+          Delete
+        </button>
+      )
+    }
   ];
   render() {
     const { movies, onLike, onDelete, onSort, sortColumn } = this.props;
