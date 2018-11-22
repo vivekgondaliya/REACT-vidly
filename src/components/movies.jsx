@@ -41,11 +41,6 @@ class Movies extends Component {
 
   handleGenreSelect = genre => {
     this.setState({ selectedGenre: genre, currentPage: 1 });
-
-    // const tempMovies = [...this.state.movies];
-    // this.setState({
-    //   movies: tempMovies.filter(movie => movie.genre.name === genre)
-    // });
   };
 
   render() {
