@@ -26,7 +26,12 @@ class MovieTable extends Component {
           sortColumn={sortColumn}
           onSort={onSort}
         />
-        <TableBody movies={movies} onDelete={onDelete} onLike={onLike} />
+        <TableBody
+          data={movies}
+          columns={this.columns}
+          onDelete={onDelete}
+          onLike={onLike}
+        />
       </table>
     );
   }
