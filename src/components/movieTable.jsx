@@ -6,16 +6,7 @@ class MovieTable extends Component {
   //so we dont have to replicate this logic in other components
   //we just return the sortColumn object and
   //the other component(i.e. Movie) will re-render accordingly
-  raiseSort = path => {
-    const sortColumn = { ...this.props.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
-    this.props.onSort(sortColumn);
-  };
+  //MOVED to tableHeader.jsx
 
   render() {
     const { movies, onLike, onDelete } = this.props;
