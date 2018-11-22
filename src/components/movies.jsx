@@ -43,6 +43,10 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
+  handleSort = e => {
+    console.log(e);
+  };
+
   render() {
     const { length: movieCount } = this.state.movies;
     const {
@@ -81,6 +85,7 @@ class Movies extends Component {
             movies={movies}
             onDelete={this.handleDelete}
             onLike={this.handleLike}
+            onSort={this.handleSort}
           />
           <Pagination
             totalMovies={filteredMovies.length}
