@@ -36,7 +36,7 @@ class MovieTable extends Component {
 
     return (
       <Table
-        movies={movies}
+        data={movies}
         columns={this.columns}
         onSort={onSort}
         sortColumn={sortColumn}
