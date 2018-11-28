@@ -1,4 +1,6 @@
 import React from "react";
+import Customer from "./components/customer";
+import Rental from "./components/rentals";
 
 const Navbar = props => {
   return (
