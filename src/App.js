@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import "./App.css";
 import Movies from "./components/movies";
 import Navbar from "./components/navbar";
 import Customer from "./components/customer";
 import Rental from "./components/rentals";
 import NotFound from "./components/commons/not-found";
 import MovieForm from "./components/movieForm";
+import "./App.css";
 
 class App extends Component {
   render() {
     return (
-      <main role="main" className="container">
+      <React.Fragment>
         <Navbar />
-        <div className="content">
+        <main role="main" className="container">
           <Switch>
             <Route path="/movie-form" component={MovieForm} />
             <Route path="/not-found" component={NotFound} />
@@ -23,8 +23,8 @@ class App extends Component {
             <Redirect from="/" exact to="/movies" />
             <Redirect to="/not-found" />
           </Switch>
-        </div>
-      </main>
+        </main>
+      </React.Fragment>
     );
   }
 }
