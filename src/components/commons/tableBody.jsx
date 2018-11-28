@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 
 class TableBody extends Component {
   renderCell = (item, column) => {
     if (column.content) return column.content(item);
-
     return _.get(item, column.path);
   };
 
@@ -20,7 +20,7 @@ class TableBody extends Component {
           <tr key={item._id}>
             {columns.map(column => (
               <td key={this.createKey(item, column)}>
-                {this.renderCell(item, column)}
+                <Link to="/movie-form">{this.renderCell(item, column)}</Link>
               </td>
             ))}
           </tr>
