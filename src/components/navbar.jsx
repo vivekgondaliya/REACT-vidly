@@ -1,13 +1,12 @@
 import React from "react";
-import Customer from "./components/customer";
-import Rental from "./components/rentals";
+import { Link } from "react-router-dom";
 
 const Navbar = props => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to="/">
         Vivdly
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -21,15 +20,15 @@ const Navbar = props => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a className="nav-item nav-link active" href="#">
+          <Link className="nav-item nav-link active" to="/">
             Movies <span className="sr-only">(current)</span>
-          </a>
-          <a className="nav-item nav-link" href="#">
+          </Link>
+          <Link className="nav-item nav-link" to="/customer">
             Customers
-          </a>
-          <a className="nav-item nav-link" href="#">
+          </Link>
+          <Link className="nav-item nav-link" to="/rental">
             Rentals
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
