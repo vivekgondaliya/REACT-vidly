@@ -36,7 +36,7 @@ class Pagination extends Component {
 }
 
 Pagination.propTypes = {
-  totalMovies: PropTypes.number.isRequired,
+  totalMovies: PropTypes.number,
   listSize: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Like from "./commons/like";
 import Table from "./commons/table";
 
@@ -9,7 +10,11 @@ class MovieTable extends Component {
   //the other component(i.e. Movie) will re-render accordingly
   //MOVED to tableHeader.jsx
   columns = [
-    { path: "title", label: "Title" },
+    {
+      path: "title",
+      label: "Title",
+      content: movie => <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+    },
     { path: "genre.name", label: "Genre" },
     { path: "numberInStocks", label: "Stock" },
     { path: "dailyRentalRate", label: "Rate" },

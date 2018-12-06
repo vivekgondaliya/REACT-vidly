@@ -18,6 +18,9 @@ const Navbar = props => {
           <NavLink className="nav-item nav-link" to="/rental">
             Rentals
           </NavLink>
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
         </div>
       </div>
     </nav>
