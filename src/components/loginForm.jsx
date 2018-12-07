@@ -4,6 +4,13 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.username = React.createRef();
+
+    this.state = {
+      account: {
+        username: "",
+        password: ""
+      }
+    };
   }
 
   handleSubmit = e => {
@@ -11,6 +18,12 @@ class LoginForm extends Component {
     //call server
     const usernameValue = this.username.current.value;
     console.log("Submitted: ", usernameValue);
+  };
+
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account.username = e.currentTarget.value;
+    this.setState({ account });
   };
 
   render() {
@@ -25,6 +38,8 @@ class LoginForm extends Component {
               ref={this.username}
               type="text"
               className="form-control"
+              value={this.state.account.username}
+              onChange={this.handleChange}
               autoFocus
             />
           </div>
