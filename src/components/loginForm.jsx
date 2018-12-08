@@ -27,14 +27,16 @@ class LoginForm extends Component {
 
   //Validate on FormSubmit
   validate = () => {
-    const result = Joi.validate(this.state.account, this.schema, {
+    const options = {
       abortEarly: false
-    });
+    };
 
-    if (!result.error) return null;
+    const { error } = Joi.validate(this.state.account, this.schema, options);
+
+    if (!error) return null;
 
     const errors = {};
-    for (let item of result.error.details) errors[item.path[0]] = item.message;
+    for (let item of error.details) errors[item.path[0]] = item.message;
     return errors;
   };
 
