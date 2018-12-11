@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
 import Input from "./commons/input";
+import Form from "./commons/form";
 
-class LoginForm extends Component {
+class LoginForm extends Form {
   constructor(props) {
     super(props);
     this.username = React.createRef();
     this.state = {
-      account: {
+      data: {
         username: "",
         password: ""
       },
@@ -25,57 +26,15 @@ class LoginForm extends Component {
       .label("Password")
   };
 
-  //Validate on FormSubmit
-  validate = () => {
-    const options = {
-      abortEarly: false
-    };
-
-    const { error } = Joi.validate(this.state.account, this.schema, options);
-
-    if (!error) return null;
-
-    const errors = {};
-    for (let item of error.details) errors[item.path[0]] = item.message;
-    return errors;
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-    if (errors) return; //skip the server call
-
+  doSubmit = () => {
     //call server
     // const usernameValue = this.username.current.value;
     // console.log("Submitted: ", usernameValue);
     console.log("Form Submitted");
   };
 
-  //validate on Change
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value }; //computed props in ES6
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-
-    return error ? error.details[0].message : null;
-  };
-
-  handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
-
-    const account = { ...this.state.account };
-    account[input.name] = input.value;
-
-    this.setState({ account, errors });
-  };
-
   render() {
-    const { account, errors } = this.state;
+    const { data, errors } = this.state;
     return (
       <div>
         <h1>Login Form</h1>
@@ -83,14 +42,14 @@ class LoginForm extends Component {
           <Input
             name="username"
             label="Username"
-            value={account.username}
+            value={data.username}
             onChange={this.handleChange}
             error={errors.username}
           />
           <Input
             name="password"
             lable="Password"
-            value={account.password}
+            value={data.password}
             onChange={this.handleChange}
             error={errors.password}
           />
